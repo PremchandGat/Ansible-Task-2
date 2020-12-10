@@ -1,0 +1,7 @@
+- hosts: localhost
+  roles:
+          - role:  launch-instance 
+
+- hosts: tag_Name_webserver
+  roles:
+    - role: conf-webserver
