@@ -1,8 +1,13 @@
-<pre>
 # Ansible-Task-2
+
+# Create a Folder for roles
+<pre>
 [root@localhost ~]# cd /
 [root@localhost ~]# mkdir myroles
 [root@localhost /]# cd  myroles/
+</pre>
+# Create Role to launch instance on AWS
+<pre>
 [root@localhost myroles]# ansible-galaxy init launch-instance
 - Role launch-instance was created successfully
 [root@localhost myroles]# cd launch-instance/
@@ -10,8 +15,10 @@
 defaults  files  handlers  meta  README.md  tasks  templates  tests  vars
 [root@localhost launch-instance]# cd tasks
 [root@localhost tasks]# vim main.yml
+</pre>
+This is task main file of launch-instance Role
+<pre>
 ---
-
 # tasks file for launch-instance                        
 - name: Launching the Webservers EC2 instances on AWS
   ec2:
@@ -32,9 +39,12 @@ defaults  files  handlers  meta  README.md  tasks  templates  tests  vars
   register: webserver_logs
 - debug:
      var: webserver_logs
-
+</pre>
+<pre>
 [root@localhost tasks]# cd ../vars/
-[root@localhost vars]# vim main.yml 
+[root@localhost vars]# vim main.yml </pre>
+This is  var main file of launch-instance Role
+<pre>
 ---
 # vars file for launch-instance
 secret: "Write your secret key"
@@ -42,8 +52,7 @@ access: "Write your access key"
 key: "mykey"
 subnet: "subnet-7eccc816"                               
 sg: "sg-078531d324434dcae"
-
-
+</pre>
 
 [root@localhost /]# cd myroles/
 [root@localhost myroles]# ansible-galaxy init conf-webserver
@@ -115,4 +124,3 @@ become_ask_pass = FALSE
 [root@localhost /]# export AWS_REGION=ap-south-1
 [root@localhost /]# export AWS_ACCESS_KEY_ID=AKIAYXXXXXXXXXXXXXXX
 [root@localhost /]# export AWS_SECRET_ACCESS_KEY=vDDg94XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-</pre>
