@@ -1,7 +1,5 @@
+<pre>
 # Ansible-Task-2
-
-Launch instance on AWS cloud
-
 [root@localhost ~]# cd /
 [root@localhost ~]# mkdir myroles
 [root@localhost /]# cd  myroles/
@@ -117,4 +115,4 @@ become_ask_pass = FALSE
 [root@localhost /]# export AWS_REGION=ap-south-1
 [root@localhost /]# export AWS_ACCESS_KEY_ID=AKIAYXXXXXXXXXXXXXXX
 [root@localhost /]# export AWS_SECRET_ACCESS_KEY=vDDg94XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
+</pre>
