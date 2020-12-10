@@ -76,7 +76,7 @@ This is tasks main file for conf-webserver Role
 
 - name: Copying webpage
   copy:
-    content: "<h1>Configured by Ansible</h1>\n <h2>Premchand</h2>{{ ansible_hostname }}"                  
+    content: """<h1>Configured by Ansible</h1>\n <h2>Premchand</h2>{{ ansible_hostname }}"""                  
     dest: "/var/www/html/index.html"
     mode: 644
 
