@@ -42,8 +42,9 @@ This is task main file of launch-instance Role
 </pre>
 <pre>
 [root@localhost tasks]# cd ../vars/
-[root@localhost vars]# vim main.yml </pre>
-This is  var main file of launch-instance Role
+[root@localhost vars]# vim main.yml 
+</pre>
+This is  vars main file of launch-instance Role
 <pre>
 ---
 # vars file for launch-instance
@@ -53,7 +54,8 @@ key: "mykey"
 subnet: "subnet-7eccc816"                               
 sg: "sg-078531d324434dcae"
 </pre>
-
+# create a Role for configuring Httpd webserver 
+<pre>
 [root@localhost /]# cd myroles/
 [root@localhost myroles]# ansible-galaxy init conf-webserver
 - Role conf-webserver was created successfully
@@ -62,6 +64,9 @@ sg: "sg-078531d324434dcae"
 defaults  files  handlers  meta  README.md  tasks  templates  tests  vars
 [root@localhost conf-webserver]# cd tasks/
 [root@localhost tasks]# vim main.yml
+</pre>
+This is tasks main file for conf-webserver Role
+<pre>
 ---
 # tasks file for conf-webserver                                                                       
 - name: Installing Apache Web Server (httpd)
@@ -80,6 +85,9 @@ defaults  files  handlers  meta  README.md  tasks  templates  tests  vars
     name: "httpd"
     state: started
     enabled: yes
+</pre>
+# Create a inventory folder 
+<pre>
 [root@localhost tasks]# cd /
 [root@localhost /]# mkdir ip
 [root@localhost /]# cd ip
@@ -89,8 +97,13 @@ defaults  files  handlers  meta  README.md  tasks  templates  tests  vars
 [root@localhost ip]# chmod +x ec2.py
 [root@localhost ip]# ls
 ec2.ini  ec2.py
-
+</pre>
+# Create a ansible playbook for taask-2
+<pre>
 [root@localhost /]# vim task2.yml
+</pre>
+This is task2.yml file
+<pre>
 - hosts: localhost
   roles:
           - role:  launch-instance
@@ -98,8 +111,13 @@ ec2.ini  ec2.py
 - hosts: tag_Name_webserver
   roles:
     - role: conf-webserver
-
+</pre>
+# Configure Ansible 
+<pre>
 [root@localhost /]# vim /etc/ansible/ansible.cfg
+</pre>
+ansible.cfg file
+<pre>
 [defaults]
 inventory=/ip/
 roles_path=/myroles
@@ -114,13 +132,21 @@ become = TRUE
 become_user = root
 become_method = sudo
 become_ask_pass = FALSE
+</pre>
 
-
+# Download your ssh key of aws and give some permissions
+<pre>
 [root@localhost /]# chmod 400 mykey.pem
 [root@localhost /]# chmod 600 mykey.pem
 [root@localhost /]# ls -l
 -rw-------.   1 root root 1674 Jul 30 23:37 mykey.pem
-
+</pre>
+# Declare AWS access key , secret key and region
+<pre>
 [root@localhost /]# export AWS_REGION=ap-south-1
 [root@localhost /]# export AWS_ACCESS_KEY_ID=AKIAYXXXXXXXXXXXXXXX
 [root@localhost /]# export AWS_SECRET_ACCESS_KEY=vDDg94XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+</pre>
+
+# Finally run this command
+<b>[root@localhost /]# ansible-playbook task2.yml</b>
