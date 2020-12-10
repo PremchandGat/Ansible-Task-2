@@ -91,8 +91,8 @@ This is tasks main file for conf-webserver Role
 [root@localhost tasks]# cd /
 [root@localhost /]# mkdir ip
 [root@localhost /]# cd ip
-[root@localhost ip]# wget 
-[root@localhost ip]# wget
+[root@localhost ip]# wget https://raw.githubusercontent.com/Premchandg278/Ansible-Task-2/main/ip/ec2.ini
+[root@localhost ip]# wget https://raw.githubusercontent.com/Premchandg278/Ansible-Task-2/main/ip/ec2.py
 [root@localhost ip]# chmod +x ec2.ini
 [root@localhost ip]# chmod +x ec2.py
 [root@localhost ip]# ls
